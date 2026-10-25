@@ -1,0 +1,48 @@
+title: Cowrie Successful SSH Login
+id: 15c63459-c5f4-4b83-aee1-e9ed33a0d4c8
+name: cowrie_successful_ssh_login
+status: experimental
+description: Selects successful simulated SSH logins recorded by Cowrie.
+logsource:
+  category: application
+  product: cowrie
+detection:
+  selection:
+    eventid: cowrie.login.success
+  condition: selection
+---
+title: Cowrie User Discovery Command
+id: b2bfcc42-315b-4e69-8b83-517539a7a5f6
+name: cowrie_user_discovery_command
+status: experimental
+description: Selects user discovery commands executed inside Cowrie.
+logsource:
+  category: application
+  product: cowrie
+detection:
+  selection:
+    eventid: cowrie.command.input
+    input:
+      - whoami
+      - id
+      - who
+      - w
+  condition: selection
+---
+title: Cowrie SSH Login Followed by User Discovery
+id: 6a93f0c9-5c94-421f-9954-d283af85854e
+status: experimental
+description: Detects a successful simulated SSH login followed by a user discovery command in the same session within five minutes.
+correlation:
+  type: temporal_ordered
+  rules:
+    - cowrie_successful_ssh_login
+    - cowrie_user_discovery_command
+  group-by:
+    - src_ip
+    - session
+  timespan: 5m
+level: medium
+tags:
+  - attack.discovery
+  - attack.t1033

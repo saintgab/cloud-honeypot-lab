@@ -1,0 +1,20 @@
+index=cowrie (
+    eventid="cowrie.login.success"
+    OR eventid="cowrie.command.input"
+    OR eventid="cowrie.session.closed"
+)
+| where isnotnull(src_ip) AND isnotnull(session)
+| eventstats
+    min(eval(if(eventid="cowrie.login.success",_time,null()))) as login_time
+    min(eval(if(eventid="cowrie.session.closed",_time,null()))) as close_time
+    by src_ip session
+| where eventid="cowrie.command.input"
+    AND in(input,"whoami","id","who","w")
+    AND isnotnull(login_time)
+    AND _time > login_time
+    AND _time-login_time <= 300
+    AND (isnull(close_time) OR _time < close_time)
+| eval rule="SSH Login Followed by User Discovery"
+| eval severity="medium"
+| eval mitre="T1033"
+| table _time src_ip session input rule severity mitre

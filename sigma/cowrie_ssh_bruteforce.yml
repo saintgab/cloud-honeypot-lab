@@ -1,0 +1,30 @@
+id: c365f472-a3ab-4d8a-9a38-634dbefd180e
+title: Cowrie SSH Failed Authentication
+name: cowrie_ssh_failed_login
+status: experimental
+description: Selects failed SSH authentication events recorded by Cowrie.
+logsource:
+  category: application
+  product: cowrie
+detection:
+  selection:
+    eventid: cowrie.login.failed
+  condition: selection
+---
+id: 6760bfe0-3ce5-4024-9a9e-b757df3dcaa5
+title: Cowrie Repeated SSH Authentication Failures
+status: experimental
+description: Detects five or more failed SSH logins from one source IP within five minutes.
+correlation:
+  type: event_count
+  rules:
+    - cowrie_ssh_failed_login
+  group-by:
+    - src_ip
+  timespan: 5m
+  condition:
+    gte: 5
+level: medium
+tags:
+  - attack.credential-access
+  - attack.t1110

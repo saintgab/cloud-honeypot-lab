@@ -1,0 +1,31 @@
+
+data/
+
+.venv/
+__pycache__/
+.DS_Store
+
+# Raw Cowrie evidence
+evidence/
+cowrie*.json
+*.tar.gz
+*.sha256
+
+# Local backups and temporary files
+*.bak
+*.backup
+*.before-*
+
+# Secrets and credentials
+.env
+.env.*
+.aws/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Runtime logs and temporary databases
+*.log
+*.sqlite
+*.sqlite3
