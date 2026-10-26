@@ -1,4 +1,5 @@
 import json
+from os import getenv
 from pathlib import Path
 
 import pandas as pd
@@ -13,13 +14,22 @@ st.set_page_config(
 st.title("🛡️ Cowrie Threat Detection Dashboard")
 st.caption("AWS SSH Honeypot | Detection Engineering Lab")
 
-LOG_DIR = Path("data/cowrie/logs")
+DEMO_MODE = getenv("COWRIE_DEMO_MODE") == "1"
+LOG_DIR = Path("examples" if DEMO_MODE else "data/cowrie/logs")
+LOG_PATTERN = "cowrie-demo.jsonl" if DEMO_MODE else "cowrie.json*"
+
+if DEMO_MODE:
+    st.info(
+        "SYNTHETIC DEMONSTRATION — All events, source IPs, "
+        "and detection alerts shown here are simulated."
+    )
+
 from detections.detect_user_discovery import TEST_IPS
 OWN_IPS = set(TEST_IPS)
 
 events = []
 
-for file in sorted(LOG_DIR.glob("cowrie.json*")):
+for file in sorted(LOG_DIR.glob(LOG_PATTERN)):
     if not file.is_file():
         continue
 

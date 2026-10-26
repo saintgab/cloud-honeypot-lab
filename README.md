@@ -228,3 +228,44 @@ This project is intended for authorized cybersecurity research, defensive securi
 The honeypot operates within infrastructure controlled by the project owner.
 
 Captured attacker commands and payloads must be treated as untrusted content and must never be executed without appropriate isolation and authorization.
+
+---
+
+## Dashboard Preview — Synthetic Demonstration
+
+The screenshot below demonstrates the detection engine using nine synthetic Cowrie SSH events. No real attacker data or personal IP addresses are included.
+
+![Cowrie Threat Detection Dashboard](docs/screenshots/demo-dashboard-full.png)
+
+### Demonstration Results
+
+| Detection | Result | MITRE ATT&CK |
+|---|---|---|
+| SSH Login Followed by User Discovery | 1 alert | T1033 |
+| Repeated SSH Authentication Failures | 1 alert | T1110 |
+
+### Run the Synthetic Demonstration
+
+From the project directory:
+
+1. Install dependencies:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+2. Generate synthetic SSH events:
+
+```bash
+python3 -m examples.generate_demo
+```
+
+3. Launch the demonstration dashboard:
+
+```bash
+COWRIE_DEMO_MODE=1 python3 -m streamlit run dashboard.py --server.address 127.0.0.1 --server.port 8502
+```
+
+4. Open http://127.0.0.1:8502 in your browser.
+
+The synthetic dataset uses reserved documentation IP addresses. Real Cowrie evidence remains private and is not included in the repository.

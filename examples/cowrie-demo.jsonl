@@ -1,0 +1,9 @@
+{"eventid": "cowrie.session.connect", "src_ip": "203.0.113.10", "session": "demo-001", "timestamp": "2026-10-25T12:00:00+00:00"}
+{"eventid": "cowrie.login.success", "src_ip": "203.0.113.10", "session": "demo-001", "timestamp": "2026-10-25T12:00:01+00:00", "username": "root"}
+{"eventid": "cowrie.command.input", "src_ip": "203.0.113.10", "session": "demo-001", "timestamp": "2026-10-25T12:00:02+00:00", "input": "whoami"}
+{"eventid": "cowrie.session.closed", "src_ip": "203.0.113.10", "session": "demo-001", "timestamp": "2026-10-25T12:00:03+00:00"}
+{"eventid": "cowrie.login.failed", "src_ip": "198.51.100.23", "session": "demo-002", "timestamp": "2026-10-25T12:01:00+00:00", "username": "admin"}
+{"eventid": "cowrie.login.failed", "src_ip": "198.51.100.23", "session": "demo-002", "timestamp": "2026-10-25T12:01:30+00:00", "username": "admin"}
+{"eventid": "cowrie.login.failed", "src_ip": "198.51.100.23", "session": "demo-002", "timestamp": "2026-10-25T12:02:00+00:00", "username": "admin"}
+{"eventid": "cowrie.login.failed", "src_ip": "198.51.100.23", "session": "demo-002", "timestamp": "2026-10-25T12:02:30+00:00", "username": "admin"}
+{"eventid": "cowrie.login.failed", "src_ip": "198.51.100.23", "session": "demo-002", "timestamp": "2026-10-25T12:03:00+00:00", "username": "admin"}

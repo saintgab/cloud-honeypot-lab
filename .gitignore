@@ -29,3 +29,7 @@ cowrie*.json
 *.log
 *.sqlite
 *.sqlite3
+
+# Temporary dashboard screenshots
+docs/screenshots/demo-dashboard.png
+docs/screenshots/parts/
